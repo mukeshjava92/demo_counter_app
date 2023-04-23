@@ -37,5 +37,22 @@ pipeline{
                    } 
                 }
             }
+            stage('Push Artifact to Nexus Repo'){
+                steps{
+                  nexusArtifactUploader artifacts: [
+                    [artifactId: 'springboot',
+                     classifier: '', 
+                     file: 'target/Uber.jar', 
+                     type: 'jar']
+                     ],
+                      credentialsId: 'nexus-auth',
+                       groupId: 'com.example',
+                       nexusUrl: '65.2.123.116:8081',
+                       nexusVersion: 'nexus3', 
+                       protocol: 'http',
+                       repository: 'http://65.2.123.116:8081/repository/demo_sprintboot/',
+                       version: '1.0.0'
+                }
+            }
         }
 }
