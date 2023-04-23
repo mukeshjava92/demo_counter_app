@@ -1,22 +1,22 @@
 pipeline{
     agent any
         stages{
-            stage(SCM Checkout){
+            stage('SCM Checkout'){
                 steps{
                     git branch: 'main', url: 'https://github.com/mukeshjava92/demo_counter_app.git'
                 }
             }
-            stage(Unit Testing){
+            stage('Unit Testing'){
                 steps{
                    sh 'mvn test'
                 }
             }
-            stage(Integration Testing){
+            stage('Integration Testing'){
                 steps{
                    sh 'mvn verify -DskipUnitTests'
                 }
             }
-            stage(Maven Build){
+            stage('Maven Build'){
                 steps{
                    sh 'mvn clean install '
                 }
