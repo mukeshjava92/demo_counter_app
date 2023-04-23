@@ -70,7 +70,7 @@ pipeline{
             stage('Push docker image to docker-hub'){
                 steps{
                   script{
-                      withCredentials([usernameColonPassword(credentialsId: 'dockercred', variable: 'dockerhub')]) {
+                      withCredentials([usernameColonPassword(credentialsId: 'docker_cred', variable: 'dockerhub')]) {
                        sh 'docker login -u mukeshjava92 -p "${dockerhub}"'
                        sh 'docker image push mukeshjava92/$JOB_NAME:v1.$BUILD_ID' 
                       }
