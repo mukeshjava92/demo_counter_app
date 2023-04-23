@@ -23,9 +23,13 @@ pipeline{
             }
             stage('scan code'){
                 steps{
-                   withSonarQubeEnv(credentialsId: 'sonarqube') {
+                  scripts{
+                    withSonarQubeEnv(credentialsId: 'sonarqube') {
                     sh ' mvn clean package sonar:sonar'
                     }
+
+                  }
+                   
                 }
             }
         }
