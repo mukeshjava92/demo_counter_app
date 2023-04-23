@@ -23,7 +23,7 @@ pipeline{
             }
               stage('Sonarqube analysis'){
                 steps{
-                  scripts{
+                  script{
                          withSonarQubeEnv(credentialsId: 'sonarqube') {
                          sh ' mvn clean package sonar:sonar'
                        }
