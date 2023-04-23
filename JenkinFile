@@ -43,6 +43,9 @@ pipeline{
 
                   def readPomVersion = readMavenPom file: 'pom.xml'
                   def nexusRepo = readPomVersion.version.endsWith("SNAPSHOT") ? "springboot_new_snashot" : "demo_sprintboot"
+                  def nexusUrl1 = 'https://65.2.123.116:8081/repository/"${nexusRepo}"/com/expmple/"${readPomVersion.artifactId}"/"${readPomVersion.version}"/"${readPomVersion.artifactId}"-"${readPomVersion.version}".jar'
+                def artifactExists = sh(script: "curl --output /dev/null --silent --head --fail ${nexusUrl1}; echo \$?", returnStatus: true)
+                 if (artifactExists == 0) {  
                   nexusArtifactUploader artifacts: [
                     [artifactId: 'springboot',
                      classifier: '', 
@@ -56,6 +59,8 @@ pipeline{
                        protocol: 'http',
                        repository: "${nexusRepo}",
                        version: "${readPomVersion.version}"
+                       return
+                  }
                  }
                 }  
             }
