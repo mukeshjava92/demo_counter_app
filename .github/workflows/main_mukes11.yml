@@ -50,4 +50,4 @@ jobs:
           app-name: 'mukes11'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8C5BDE2CB76A4C44825D0DCE673F0D17 }}
-          package: '*.jar'
+          package: '${{ github.workspace }}/target/*.jar'
